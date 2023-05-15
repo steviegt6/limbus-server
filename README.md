@@ -8,13 +8,15 @@ r&d
 
 ## API
 
-Endpoint: `https://www.limbuscompanyapi-2.com`
+Official endpoint: `https://www.limbuscompanyapi-2.com`
 
-Format: `https://www.limbuscompanyapi-2.com` + `[route]` + `[path]`
+<!-- Format: `https://www.limbuscompanyapi-2.com` + `[route]` + `[path]` -->
 
 ### Routes
 
-| Name      | Route      | `i` |
+There are `6` API routes that serve essentially as categories for the REST API.
+
+| Name      | Route      | `n` |
 | --------- | ---------- | --- |
 | `API`     | `/api`     | `0` |
 | `LOGIN`   | `/login`   | `1` |
@@ -22,3 +24,27 @@ Format: `https://www.limbuscompanyapi-2.com` + `[route]` + `[path]`
 | `IAP`     | `/iap`     | `3` |
 | `PRIVACY` | `/privacy` | `4` |
 | `ADMIN`   | `/admin`   | `5` |
+
+#### API
+
+TODO
+
+#### LOGIN
+
+TODO
+
+#### LOG
+
+TODO
+
+#### IAP
+
+TODO
+
+#### PRIVACY
+
+TODO
+
+#### ADMIN
+
+TODO
