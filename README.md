@@ -8,9 +8,9 @@ r&d
 
 ## API
 
-Official endpoint: `https://www.limbuscompanyapi-2.com`
+Official endpoint: `https://www.limbuscompanyapi.com`
 
-<!-- Format: `https://www.limbuscompanyapi-2.com` + `[route]` + `[path]` -->
+<!-- Format: `https://www.limbuscompanyapi.com` + `[route]` + `[path]` -->
 
 ### Routes
 
