@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomat.LimbusServer.LogPassthrough", "Tomat.LimbusServer.LogPassthrough\Tomat.LimbusServer.LogPassthrough.csproj", "{FBE40505-3AF5-46CF-8986-98A29D6CDA88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomat.LimbusServer.UrlRedirect", "Tomat.LimbusServer.UrlRedirect\Tomat.LimbusServer.UrlRedirect.csproj", "{74DD185F-5B03-428A-8AA4-203124930392}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{272ED56D-683F-432F-A046-7AE2855FACAA}"
+	ProjectSection(SolutionItems) = preProject
+		shared\EnvironmentVariables.targets = shared\EnvironmentVariables.targets
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FBE40505-3AF5-46CF-8986-98A29D6CDA88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE40505-3AF5-46CF-8986-98A29D6CDA88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE40505-3AF5-46CF-8986-98A29D6CDA88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE40505-3AF5-46CF-8986-98A29D6CDA88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74DD185F-5B03-428A-8AA4-203124930392}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74DD185F-5B03-428A-8AA4-203124930392}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74DD185F-5B03-428A-8AA4-203124930392}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74DD185F-5B03-428A-8AA4-203124930392}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
