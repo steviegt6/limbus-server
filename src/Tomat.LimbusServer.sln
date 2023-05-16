@@ -14,6 +14,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{272ED5
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomat.LimbusServer.Api", "Tomat.LimbusServer.Api\Tomat.LimbusServer.Api.csproj", "{55712886-6112-4920-885B-FCE9E66DE55A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tomat.LimbusServer.GoofySillyTesting", "Tomat.LimbusServer.GoofySillyTesting\Tomat.LimbusServer.GoofySillyTesting.csproj", "{355345D4-4A39-4B98-95BD-BDD7D6815D80}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,5 +37,9 @@ Global
 		{55712886-6112-4920-885B-FCE9E66DE55A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55712886-6112-4920-885B-FCE9E66DE55A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55712886-6112-4920-885B-FCE9E66DE55A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{355345D4-4A39-4B98-95BD-BDD7D6815D80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{355345D4-4A39-4B98-95BD-BDD7D6815D80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{355345D4-4A39-4B98-95BD-BDD7D6815D80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{355345D4-4A39-4B98-95BD-BDD7D6815D80}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
