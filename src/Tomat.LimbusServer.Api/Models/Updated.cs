@@ -2,48 +2,54 @@
 
 namespace Tomat.LimbusServer.Api.Models;
 
-public sealed class Updated {
+public class Updated {
     [JsonProperty("isInitialized")]
     public bool IsInitialized { get; set; }
 
     [JsonProperty("userInfo")]
-    public object UserInfo { get; set; } = new(); // TODO
+    public UserInfo UserInfo { get; set; }
 
     [JsonProperty("personalityList")]
-    public List<object> PersonalityList { get; set; } = new(); // TODO
+    public List<Personality> PersonalityList { get; set; }
 
     [JsonProperty("egoList")]
-    public List<object> EgoList { get; set; } = new(); // TODO
+    public List<Ego> EgoList { get; set; }
 
     [JsonProperty("formationList")]
-    public List<object> FormationList { get; set; } = new(); // TODO
+    public List<Formation> FormationList { get; set; }
 
     [JsonProperty("lobbyCG")]
-    public object LobbyCg { get; set; } = new(); // TODO
-
-    [JsonProperty("itemList")]
-    public List<object> ItemList { get; set; } = new(); // TODO
+    public LobbyCg LobbyCg { get; set; }
 
     [JsonProperty("chanceList")]
-    public List<object> ChanceList { get; set; } = new(); // TODO
+    public List<Chance> ChanceList { get; set; }
 
     [JsonProperty("battlePass")]
-    public object BattlePass { get; set; } = new(); // TODO
+    public BattlePass BattlePass { get; set; }
 
     [JsonProperty("mainChapterStateList")]
-    public List<object> MainChapterStateList { get; set; } = new(); // TODO
+    public List<MainChapterState> MainChapterStateList { get; set; }
 
     [JsonProperty("mailList")]
-    public List<object> MailList { get; set; } = new(); // TODO
+    public List<Mail> MailList { get; set; }
 
     [JsonProperty("announcer")]
-    public object Announcer { get; set; } = new(); // TODO
+    public Announcer Announcer { get; set; }
 
     [JsonProperty("membershipList")]
-    public List<object> MembershipList { get; set; } = new(); // TODO
+    public List<Membership> MembershipList { get; set; }
+
+    [JsonProperty("gachaList")]
+    public List<Gacha> GachaList { get; set; }
+
+    [JsonProperty("userUnlockCodeList")]
+    public List<UserUnlockCode> UserUnlockCodeList { get; set; }
+
+    [JsonProperty("eventRewardStateList")]
+    public List<EventRewardState> EventRewardStateList { get; set; }
 
     [JsonProperty("isUpdateUserBanner")]
-    public bool IsUpdateUserBanner { get; set; }
+    public bool IsUpdatedUserBanner { get; set; }
 
     [JsonProperty("isResetMirrorDungeon")]
     public bool IsResetMirrorDungeon { get; set; }

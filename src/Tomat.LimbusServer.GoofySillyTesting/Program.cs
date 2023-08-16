@@ -83,11 +83,12 @@ internal static class Program {
 
         switch (path) {
             case "/log/GetMailLogAll":
-                var model = JsonConvert.DeserializeObject<ResponseWrapper<GetMailLogAll>>(json);
+                var model = JsonConvert.DeserializeObject<ResponseWrapper<GetMailLogAllResultPacket>>(json);
                 var mail = model!.Result!.MailLogs[0];
+                var origCount = mail.Attachments.Count;
 
                 for (var i = 0; i < 10; i++) {
-                    mail.ContentId = i + 3;
+                    mail.ContentId = origCount + i;
                     model!.Result!.MailLogs.Add(mail);
                 }
 
