@@ -9,7 +9,7 @@ using Cpp2IL.Core.Model.Contexts;
 namespace Tomat.LimbusServer.PacketScraper;
 
 public class PacketScraperOutputFormat : Cpp2IlOutputFormat {
-    // private readonly Dictionary<>
+    private readonly Dictionary<string, TypeAnalysisContext> serializedTypes = new();
 
     public override string OutputFormatId => "packet-scraper";
 
@@ -43,31 +43,55 @@ public class PacketScraperOutputFormat : Cpp2IlOutputFormat {
             Logger.InfoNewline("Resolved packet type: " + packetType.FullName);
             Logger.InfoNewline("{");
 
-            if (packetType.BaseType is not GenericInstanceTypeAnalysisContext genericInstance)
-                throw new Exception("Packet base type is not generic instance.");
-
-            var genericInstances = (List<TypeAnalysisContext>)typeof(ReferencedTypeAnalysisContext).GetProperty("GenericArguments", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(genericInstance)!;
+            var genericInstances = GetGenericArgumentsFor(packetType.BaseType!);
             var reqPacketType = genericInstances[0];
             var resPacketType = genericInstances[1];
 
+            // RecordSerializableTypes(reqPacketType);
+            // RecordSerializableTypes(resPacketType);
+
             Logger.InfoNewline("    Request packet type: " + reqPacketType.FullName);
             Logger.InfoNewline("    {");
-            LogSerializableFields(reqPacketType, 3);
+            LogPacket(reqPacketType, 3);
             Logger.InfoNewline("    }");
             Logger.InfoNewline("    Response packet type: " + resPacketType.FullName);
             Logger.InfoNewline("    {");
-            LogSerializableFields(resPacketType, 3);
+            LogPacket(resPacketType, 3);
             Logger.InfoNewline("    }");
         }
 
         Logger.InfoNewline("}");
+
+        foreach (var type in serializedTypes.Values) {
+            Logger.InfoNewline(FormatType(type) + ":");
+            Logger.InfoNewline("{");
+            LogPacket(type, 1);
+            Logger.InfoNewline("}");
+        }
     }
 
-    private void LogSerializableFields(TypeAnalysisContext type, int indentLevel) {
+    private void LogPacket(TypeAnalysisContext type, int indentLevel) {
         var indent = new string(' ', indentLevel * 4);
 
-        foreach (var field in type.Fields.Where(x => x.CustomAttributes!.Any(y => y.Constructor.DeclaringType!.Name == "SerializeField"))) {
-            Logger.InfoNewline(indent + field.Name + " (" + field.FieldTypeContext.FullName + ")");
+        foreach (var field in type.Fields.Where(x => x.Attributes.HasFlag(FieldAttributes.Public) || x.CustomAttributes!.Any(y => y.Constructor.DeclaringType!.Name == "SerializeField"))) {
+            RecordSerializableTypes(field.FieldTypeContext);
+            Logger.InfoNewline(indent + field.Name + " (" + FormatType(field.FieldTypeContext) + ")");
+
+            // if (field.FieldTypeContext.DeclaringAssembly.CleanAssemblyName == "mscorlib")
+            //     continue;
+
+            // if (field.FieldTypeContext.Namespace.StartsWith("System"))
+            //    continue;
+
+            // LogFieldWithoutChildFields(field.FieldTypeContext, indentLevel + 1);
+        }
+    }
+
+    /*private void LogSerializableFields(TypeAnalysisContext type, int indentLevel) {
+        var indent = new string(' ', indentLevel * 4);
+
+        foreach (var field in type.Fields.Where(x => x.Attributes.HasFlag(FieldAttributes.Public) || x.CustomAttributes!.Any(y => y.Constructor.DeclaringType!.Name == "SerializeField"))) {
+            Logger.InfoNewline(indent + field.Name + " (" + FormatType(field.FieldTypeContext) + ")");
 
             // if (field.FieldTypeContext.DeclaringAssembly.CleanAssemblyName == "mscorlib")
             //     continue;
@@ -79,5 +103,49 @@ public class PacketScraperOutputFormat : Cpp2IlOutputFormat {
             LogSerializableFields(field.FieldTypeContext, indentLevel + 1);
             Logger.InfoNewline(indent + "}");
         }
+    }*/
+
+    private static string FormatType(TypeAnalysisContext type) {
+        switch (type.FullName) {
+            case "System.Int32":
+                return "int";
+
+            case "System.String":
+                return "string";
+        }
+
+        if (type.FullName.StartsWith("System.Collections.Generic.List`1")) {
+            var generics = GetGenericArgumentsFor(type);
+            return FormatType(generics[0]) + "[]";
+        }
+
+        return type.FullName;
+    }
+
+    private void RecordSerializableTypes(TypeAnalysisContext type) {
+        if (type.Namespace.StartsWith("System")) {
+            if (type.FullName.StartsWith("System.Collections.Generic.List`1"))
+                RecordSerializableTypes(GetGenericArgumentsFor(type)[0]);
+
+            return;
+        }
+
+        // if (type.CustomAttributes!.All(x => x.Constructor.DeclaringType!.Name != "SerializableAttribute"))
+        //    throw new Exception("Type is not serializable.");
+
+        if (serializedTypes.ContainsKey(type.FullName))
+            return;
+
+        foreach (var field in type.Fields.Where(x => x.Attributes.HasFlag(FieldAttributes.Public) || x.CustomAttributes!.Any(y => y.Constructor.DeclaringType!.Name == "SerializeField")))
+            RecordSerializableTypes(field.FieldTypeContext);
+
+        serializedTypes.Add(type.FullName, type);
+    }
+
+    private static List<TypeAnalysisContext> GetGenericArgumentsFor(TypeAnalysisContext type) {
+        if (type is not ReferencedTypeAnalysisContext referencedInstance)
+            throw new Exception("Type type is not generic instance.");
+
+        return (List<TypeAnalysisContext>)typeof(ReferencedTypeAnalysisContext).GetProperty("GenericArguments", BindingFlags.Instance | BindingFlags.NonPublic)!.GetValue(referencedInstance)!;
     }
 }
