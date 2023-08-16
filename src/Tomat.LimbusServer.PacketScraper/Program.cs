@@ -16,8 +16,9 @@ internal static class Program {
         var cpp2ILProgram = cpp2ILAsm.GetType("Cpp2IL.Program");
         var cpp2ILProgramMain = cpp2ILProgram!.GetMethod("Main", System.Reflection.BindingFlags.Static | System.Reflection.BindingFlags.Public);
         var gameFolder = args[0];
-        
+
         OutputFormatRegistry.Register<ExtendedAsmResolverDummyDllOutputFormat>();
-        cpp2ILProgramMain?.Invoke(null, new object?[] { new[] { "--game-path", gameFolder, "--output-as", "extended-dummydll" } });
+        OutputFormatRegistry.Register<PacketScraperOutputFormat>();
+        cpp2ILProgramMain?.Invoke(null, new object?[] { new[] { "--game-path", gameFolder, "--output-as", "packet-scraper" } });
     }
 }
