@@ -1,0 +1,4 @@
+[submodule "src/Cpp2IL"]
+	path = src/Cpp2IL
+	url = https://github.com/SamboyCoding/Cpp2IL.git
+	branch = development
