@@ -123,6 +123,10 @@ public class PacketScraperOutputFormat : Cpp2IlOutputFormat {
     }
 
     private void RecordSerializableTypes(TypeAnalysisContext type) {
+        if (serializedTypes.ContainsKey(type.FullName)) {
+            return;
+        }
+
         if (type.Namespace.StartsWith("System")) {
             if (type.FullName.StartsWith("System.Collections.Generic.List`1"))
                 RecordSerializableTypes(GetGenericArgumentsFor(type)[0]);
@@ -130,16 +134,16 @@ public class PacketScraperOutputFormat : Cpp2IlOutputFormat {
             return;
         }
 
+        serializedTypes.Add(type.FullName, type);
+
         // if (type.CustomAttributes!.All(x => x.Constructor.DeclaringType!.Name != "SerializableAttribute"))
         //    throw new Exception("Type is not serializable.");
 
-        if (serializedTypes.ContainsKey(type.FullName))
-            return;
+        // if (serializedTypes.ContainsKey(type.FullName))
+        //     return;
 
         foreach (var field in type.Fields.Where(x => x.Attributes.HasFlag(FieldAttributes.Public) || x.CustomAttributes!.Any(y => y.Constructor.DeclaringType!.Name == "SerializeField")))
             RecordSerializableTypes(field.FieldTypeContext);
-
-        serializedTypes.Add(type.FullName, type);
     }
 
     private static List<TypeAnalysisContext> GetGenericArgumentsFor(TypeAnalysisContext type) {
