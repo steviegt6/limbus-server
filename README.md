@@ -1,3 +1,10 @@
+> [!WARNING]
+> This project never got off the ground, but Something Wicked This Way Comes...
+> 
+> This repository will continue to persist in an archived manner for archival purposes and because there is still some valuable information here.
+> 
+> Stay tuned for further news.
+
 # limbus-server
 
 > limbus deez
