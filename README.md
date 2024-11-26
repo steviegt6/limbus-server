@@ -3,7 +3,9 @@
 > 
 > This repository will continue to persist in an archived manner for archival purposes and because there is still some valuable information here.
 > 
-> Stay tuned for further news.
+> ~~Stay tuned for further news.~~
+>
+> **DEATH BE UPON YE; USE THIS:** [LEAGUE-OF-NINE/FurinaLC](https://github.com/LEAGUE-OF-NINE/FurinaLC)
 
 # limbus-server
 
